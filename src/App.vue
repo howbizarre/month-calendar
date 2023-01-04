@@ -19,6 +19,10 @@
 
 <style scoped>
 .card-container {
-    @apply bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-zinc-900/5 dark:ring-zinc-600/25 shadow-xl dark:shadow-zinc-800;
+    @apply 
+        bg-white dark:bg-slate-800
+        ring-1 ring-zinc-900/5 dark:ring-zinc-600/25
+        shadow-xl dark:shadow-zinc-800
+        rounded-lg px-6 py-8 ;
 }
 </style>
