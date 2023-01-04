@@ -39,10 +39,17 @@
             docElm.classList.remove("light");
             docElm.classList.add("dark");
         } else {
-            lightIcon.classList.remove("hidden");
-            docElm.classList.remove("dark");
-            docElm.classList.add("light");
-            localStorage.setItem("color-theme", "light");
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                darkIcon.classList.remove("hidden");
+                docElm.classList.remove("light");
+                docElm.classList.add("dark");
+                localStorage.setItem("color-theme", "dark");
+            } else {
+                lightIcon.classList.remove("hidden");
+                docElm.classList.remove("dark");
+                docElm.classList.add("light");
+                localStorage.setItem("color-theme", "light");
+            }
         }
 
         themeToggleBtn.addEventListener("click", function () {
