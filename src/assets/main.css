@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.calendar-grid {
+    @apply grid grid-cols-7 gap-2 p-3;
+}
+
 /* Remove default arrows in input type number fields */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
