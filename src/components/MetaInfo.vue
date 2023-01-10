@@ -1,0 +1,14 @@
+<template>
+  <h1 class="p-3 text-left capitalize text-3xl font-serif text-zinc-600 dark:text-zinc-200">{{ nameOfMonth }} {{ year }}</h1>
+</template>
+
+<script lang="ts" setup>
+import { monthName } from "typescript-calendar-date";
+
+const props = defineProps<{
+  month: number;
+  year: number;
+}>();
+
+const nameOfMonth = monthName(props.month);
+</script>

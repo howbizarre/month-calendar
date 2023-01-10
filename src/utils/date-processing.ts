@@ -1,5 +1,7 @@
 export type WeekFirstDay = "monday" | "sunday";
 
+export const totalDaysInMonthGrid = 42;
+
 export const weekDays = {
     "firstDay": {
         "0": "sunday",
