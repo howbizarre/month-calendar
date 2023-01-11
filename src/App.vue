@@ -1,10 +1,6 @@
 <template>
   <div class="month-container w-[366px]">
-    <div class="flex justify-between">
-      <button @click="prevMonth">Prev</button>
-      <button @click="nextMonth">Next</button>
-    </div>
-
+    <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" />
     <meta-info :month="month" :year="year" />
     <week-days :startDay="firstDayOfTheWeek" />
     <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" />
@@ -23,6 +19,7 @@ import type { Ref } from "vue";
 import MetaInfo from "@/components/MetaInfo.vue";
 import WeekDays from "@/components/WeekDays.vue";
 import MonthDays from "@/components/MonthDays.vue";
+import MonthActions from "@/components/MonthActions.vue";
 
 const firstDayOfTheWeek: Ref<WeekFirstDay> = ref("monday");
 
@@ -41,6 +38,11 @@ function nextMonth(): void {
 function prevMonth(): void {
   year.value = month.value === 1 ? year.value - 1 : year.value;
   month.value = month.value === 1 ? 12 : month.value - 1;
+}
+
+function resetMonth(): void {
+  year.value = currentYear;
+  month.value = currentMonth;
 }
 </script>
 
