@@ -2,6 +2,8 @@
 
 A simple UI Component to visualize a month of a year.
 
+You can revert the month till the end of time in any direction and return back to the present.
+
 ## Dependency
 
 - [Typescript calendar](https://github.com/tskj/typescript-calendar-date)
