@@ -1,7 +1,7 @@
 <template>
   <div class="calendar-grid py-3">
-    <div v-for="md in allDaysInMonth" class="text-center">
-      <button :data-info="[md.day, md.date, md.month, md.year]" class="calendar-day" :class="md.day === 'sat' || md.day === 'sun' ? 'weekend' : ''">
+    <div v-for="md in allDaysInMonth" class="text-center" :key="md.day + md.date + md.month + md.year">
+      <button :id="`${md.day}${md.date}${md.month}${md.year}`" class="calendar-day" :class="md.day === 'sat' || md.day === 'sun' ? 'weekend' : ''">
         {{ md.date }}
       </button>
     </div>
