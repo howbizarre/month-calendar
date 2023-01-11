@@ -2,7 +2,7 @@
   <div class="month-container w-[366px]">
     <div class="grid grid-cols-5 p-3">
       <month-info :month="month" :year="year" :class="`col-span-3`" />
-      <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" :class="`col-span-2`" />
+      <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" :class="`col-span-2`" :hasReset="hasReset" />
     </div>
     <week-days :startDay="firstDayOfTheWeek" />
     <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" @activate-date="activateDate" :activeDay="active" />
@@ -43,6 +43,8 @@ const active = reactive({
   date: ref(currentDate)
 });
 
+const hasReset = ref(false);
+
 function activateDate(date: number, month: Month, year: number) {
   const mnt = monthNumber(month);
 
@@ -54,16 +56,22 @@ function activateDate(date: number, month: Month, year: number) {
 function nextMonth(): void {
   year.value = month.value === 12 ? year.value + 1 : year.value;
   month.value = month.value === 12 ? 1 : month.value + 1;
+
+  hasReset.value = year.value === currentYear && month.value === currentMonth ? false : true;
 }
 
 function prevMonth(): void {
   year.value = month.value === 1 ? year.value - 1 : year.value;
   month.value = month.value === 1 ? 12 : month.value - 1;
+
+  hasReset.value = year.value === currentYear && month.value === currentMonth ? false : true;
 }
 
 function resetMonth(): void {
   year.value = currentYear;
   month.value = currentMonth;
+
+  hasReset.value = false;
 }
 </script>
 
