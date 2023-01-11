@@ -1,7 +1,7 @@
 <template>
   <div class="calendar-grid py-3">
     <div v-for="md in allDaysInMonth" class="text-center" :key="md.day + md.date + md.month + md.year">
-      <button :id="`${md.day}${md.date}${md.month}${md.year}`" class="calendar-day" :class="md.day === 'sat' || md.day === 'sun' ? 'weekend' : ''">
+      <button :id="`${md.day}${md.date}${md.month}${md.year}`" class="calendar-day" :class="[ isWeedend(md.day), isCurrent(md.date, md.month, md.year)]">
         {{ md.date }}
       </button>
     </div>
@@ -10,12 +10,33 @@
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import { monthName, numberOfDaysInMonth, dayOfWeek } from "typescript-calendar-date";
-import { weekDays, totalDaysInMonthGrid } from "@/utils/date-processing";
+import { fillMonth } from "@/utils/date-processing";
+import { monthNumber } from "typescript-calendar-date";
 
-import type { CalendarMonth, CalendarYear } from "typescript-calendar-date";
-import type { WeekFirstDay } from "@/utils/date-processing";
-import type { Month } from "typescript-calendar-date/dist/consts";
+import type { WeekFirstDay, Month } from "@/utils/date-processing";
+
+const dateObject = new Date();
+const currentMonth = dateObject.getMonth() + 1;
+const currentYear = dateObject.getFullYear();
+const currentDate = dateObject.getDate();
+
+const isWeedend = (day: string): string => {
+  return day === 'sat' || day === 'sun' ? 'weekend' : 'weekday';
+}
+
+const isCurrent = (date: number, month: Month, year: number): string => {
+  const mnt = monthNumber(month);
+
+  if (year !== currentYear) {
+    return '';
+  }
+
+  if (mnt !== currentMonth) {
+    return '';
+  }
+
+  return `${date}${mnt}${year}` === `${currentDate}${currentMonth}${currentYear}` ? 'current' : '';
+}
 
 const props = defineProps<{
   startDay: WeekFirstDay;
@@ -23,89 +44,11 @@ const props = defineProps<{
   year: number;
 }>();
 
-type MonthArray = {
-  day: string;
-  date: number;
-  month: Month;
-  year: number;
-};
-
 const allDaysInMonth = ref(fillMonth(props.month, props.year, props.startDay));
 
 watch(props, () => {
   allDaysInMonth.value = fillMonth(props.month, props.year, props.startDay);
 });
-
-function fillMonth(month: number, year: number, firstDayOfTheWeek: WeekFirstDay): MonthArray[] {
-  const fullFiledArray = new Array();
-
-  const nameOfMonth = monthName(month);
-  const viewYear: CalendarYear = {
-    year: year
-  };
-  const viewMonth: CalendarMonth = {
-    ...viewYear,
-    month: nameOfMonth
-  };
-
-  const firstWeekDayInMonth = dayOfWeek({ ...viewMonth, day: 1 });
-  const countDaysInViewMonth = numberOfDaysInMonth(viewMonth);
-  const countDaysInPrevMonth = numberOfDaysInMonth({ year: month === 1 ? year - 1 : year, month: monthName(month - 1) });
-
-  const daysOffsets = weekDays[firstDayOfTheWeek].short.indexOf(firstWeekDayInMonth);
-  const daysPreset = totalDaysInMonthGrid - (daysOffsets + countDaysInViewMonth);
-
-  let dOff = daysOffsets;
-  let dPrs = daysPreset < 7 ? 7 - daysPreset : 14 - daysPreset;
-
-  for (let i = 0; i < daysOffsets; i += 1) {
-    const date = (countDaysInPrevMonth + (i + 1)) - daysOffsets;
-    const day = weekDays[firstDayOfTheWeek].short[i];
-    const mnth = monthName(month - 1);
-    const yr = month === 1 ? year - 1 : year;
-
-    fullFiledArray.push({
-      day: day,
-      date: date,
-      month: mnth,
-      year: yr
-    });
-  }
-
-  for (let i = 0; i < countDaysInViewMonth; i += 1) {
-    const date = i + 1;
-    const day = weekDays[firstDayOfTheWeek].short[dOff];
-    const mnth = monthName(month);
-    const yr = year;
-
-    dOff = dOff > 5 ? 0 : dOff + 1;
-
-    fullFiledArray.push({
-      day: day,
-      date: date,
-      month: mnth,
-      year: yr
-    });
-  }
-
-  for (let i = 0; i < daysPreset; i += 1) {
-    const date = i + 1;
-    const day = weekDays[firstDayOfTheWeek].short[dPrs];
-    const mnth = monthName(month + 1);
-    const yr = month === 12 ? year + 1 : year;
-
-    dPrs = dPrs > 5 ? 0 : dPrs + 1;
-    
-    fullFiledArray.push({
-      day: day,
-      date: date,
-      month: mnth,
-      year: yr
-    });
-  }
-
-  return fullFiledArray;
-}
 </script>
 
 <style>
@@ -118,5 +61,13 @@ function fillMonth(month: number, year: number, firstDayOfTheWeek: WeekFirstDay)
 
 .calendar-day.weekend {
     @apply bg-sky-500/5 hover:bg-cyan-500/25;
+}
+
+.calendar-day.current {
+    @apply bg-teal-500/25;
+}
+
+.calendar-day.active {
+    @apply bg-cyan-500/25;
 }
 </style>
