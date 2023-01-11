@@ -4,11 +4,13 @@ A simple UI Component to visualize a month of a year.
 
 ## Dependency
 
+- [Typescript calendar](https://github.com/tskj/typescript-calendar-date)
 - [Vue 3](https://github.com/vuejs/core)
 - [Tailwindcss](https://github.com/tailwindlabs/tailwindcss)
-- [Typescript calendar](https://github.com/tskj/typescript-calendar-date)
 
-## Project Setup
+### Install
+
+First clone [repository](https://github.com/howbizarre/month-calendar.git) then:
 
 ```sh
 npm install
@@ -25,3 +27,4 @@ npm run dev
 ```sh
 npm run build
 ```
+
