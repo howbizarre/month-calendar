@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-grid">
+  <div class="calendar-grid py-3">
     <div v-for="md in allDaysInMonth" class="text-center">
       <button class="calendar-day" :class="md.day === 'sat' || md.day === 'sun' ? 'weekend' : ''">
         {{ md.date }}

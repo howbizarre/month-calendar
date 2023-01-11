@@ -1,7 +1,7 @@
 <template>
   <div class="month-container w-[366px]">
-    <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" />
     <meta-info :month="month" :year="year" />
+    <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" />
     <week-days :startDay="firstDayOfTheWeek" />
     <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" />
   </div>

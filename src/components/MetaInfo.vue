@@ -1,5 +1,5 @@
 <template>
-  <h1 class="p-3 text-left capitalize text-3xl font-serif text-zinc-600 dark:text-zinc-200">{{ monthName(month) }} {{ year }}</h1>
+  <h1 class="p-3 text-center capitalize text-3xl font-serif text-teal-600">{{ monthName(month) }} {{ year }}</h1>
 </template>
 
 <script lang="ts" setup>
