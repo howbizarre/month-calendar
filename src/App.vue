@@ -1,34 +1,55 @@
 <template>
   <div class="month-container w-[366px]">
-    <meta-info :month="month" :year="year" />
-    <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" />
+    <div class="grid grid-cols-5 p-3">
+      <month-info :month="month" :year="year" :class="`col-span-3`" />
+      <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" :class="`col-span-2`" />
+    </div>
     <week-days :startDay="firstDayOfTheWeek" />
-    <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" />
+    <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" @activate-date="activateDate" :activeDay="active" />
+    <month-label :month="active.month" :year="active.year" :date="active.date" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { weekDays } from "@/utils/date-processing";
+import { monthNumber } from "typescript-calendar-date";
 
 /** Types */
-import type { WeekFirstDay } from "@/utils/date-processing";
+import type { WeekFirstDay, Month } from "@/utils/date-processing";
 import type { Ref } from "vue";
 
 /** Components */
-import MetaInfo from "@/components/MetaInfo.vue";
+import MonthInfo from "@/components/MonthInfo.vue";
 import WeekDays from "@/components/WeekDays.vue";
 import MonthDays from "@/components/MonthDays.vue";
 import MonthActions from "@/components/MonthActions.vue";
+import MonthLabel from "@/components/MonthLabel.vue";
 
 const firstDayOfTheWeek: Ref<WeekFirstDay> = ref("monday");
 
 const dateObject = new Date();
 const currentMonth = dateObject.getMonth() + 1;
 const currentYear = dateObject.getFullYear();
+const currentDate = dateObject.getDate();
 
 const month = ref(currentMonth);
 const year = ref(currentYear);
+const date = ref(currentDate);
+
+const active = reactive({
+  month: ref(currentMonth),
+  year: ref(currentYear),
+  date: ref(currentDate)
+});
+
+function activateDate(date: number, month: Month, year: number) {
+  const mnt = monthNumber(month);
+
+  active.month = mnt;
+  active.year = year;
+  active.date = date;
+}
 
 function nextMonth(): void {
   year.value = month.value === 12 ? year.value + 1 : year.value;

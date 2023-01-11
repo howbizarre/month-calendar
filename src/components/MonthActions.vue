@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between p-3">
+    <div class="flex justify-between">
       <button @click="prevMonth">
         <svg width="24" height="24" viewBox="0 0 256 256" class="action-icon">
           <path fill="currentColor" d="m120 32l-96 96l96 96v-48h32V80h-32V32z" opacity=".2" />
