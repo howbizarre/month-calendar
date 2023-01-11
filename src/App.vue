@@ -1,6 +1,10 @@
 <template>
   <div class="month-container w-[366px]">
-    <button @click="next">Next</button>
+    <div class="flex justify-between">
+      <button @click="prevMonth">Prev</button>
+      <button @click="nextMonth">Next</button>
+    </div>
+
     <meta-info :month="month" :year="year" />
     <week-days :startDay="firstDayOfTheWeek" />
     <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" />
@@ -29,10 +33,14 @@ const currentYear = dateObject.getFullYear();
 const month = ref(currentMonth);
 const year = ref(currentYear);
 
-function next(): void {
-  month.value = month.value === 12 ? 1 : month.value + 1;
+function nextMonth(): void {
   year.value = month.value === 12 ? year.value + 1 : year.value;
-  console.log(month.value, year.value);
+  month.value = month.value === 12 ? 1 : month.value + 1;
+}
+
+function prevMonth(): void {
+  year.value = month.value === 1 ? year.value - 1 : year.value;
+  month.value = month.value === 1 ? 12 : month.value - 1;
 }
 </script>
 

@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, toRefs } from "vue";
+import { ref, watch } from "vue";
 import { monthName, numberOfDaysInMonth, dayOfWeek } from "typescript-calendar-date";
 import { weekDays, totalDaysInMonthGrid } from "@/utils/date-processing";
 
@@ -22,21 +22,10 @@ const props = defineProps<{
   year: number;
 }>();
 
-const ptr = toRefs(props);
-
-watch(
-  () => props.month,
-  () => {
-    ptr.month.value = props.month;
-  }
-);
-
-console.log('ptr.month.value, ptr.year.value', ptr.month.value, ptr.year.value);
-
-const nameOfMonth = monthName(ptr.month.value);
+const nameOfMonth = monthName(props.month);
 
 const viewYear: CalendarYear = {
-  year: ptr.year.value
+  year: props.year
 };
 const viewMonth: CalendarMonth = {
   ...viewYear,
