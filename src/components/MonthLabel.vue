@@ -1,7 +1,10 @@
 
 <template>
   <div class="info-bottom p-3">
-    <strong>{{ date }} {{ monthName(month)[0].toUpperCase() }}{{ monthName(month).slice(1) }} {{ year }}</strong>
+    <div>
+      <strong>{{ date }} {{ nameOfMonth }} {{ year }}</strong>
+      <button>today</button>
+    </div>
 
     <a href="https://github.com/howbizarre/month-calendar" title="Vue 3 with Typescript Calendar and Tailwindcss">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="flex-shrink-0 h-5 w-5" style="" width="1em" height="1em" viewBox="0 0 24 24">
@@ -12,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
 import { monthName } from "typescript-calendar-date";
 
 const props = defineProps<{
@@ -19,6 +23,8 @@ const props = defineProps<{
   year: number;
   date: number;
 }>();
+
+const nameOfMonth = ref(monthName(props.month)[0].toUpperCase() + monthName(props.month).slice(1));
 </script>
 
 <style>
