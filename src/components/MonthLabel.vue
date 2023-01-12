@@ -3,7 +3,9 @@
   <div class="info-bottom p-3">
     <div>
       <strong>{{ date }} {{ nameOfMonth }} {{ year }}</strong>
-      <button>today</button>
+      <button @click="resetActiveDate" class="text-xs border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors rounded-2xl ml-2 px-1" v-if="resetDate">
+        today
+      </button>
     </div>
 
     <a href="https://github.com/howbizarre/month-calendar" title="Vue 3 with Typescript Calendar and Tailwindcss">
@@ -15,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { monthName } from "typescript-calendar-date";
 
 const props = defineProps<{
@@ -23,6 +25,23 @@ const props = defineProps<{
   year: number;
   date: number;
 }>();
+
+const emit = defineEmits(['resetActiveDate']);
+
+const resetActiveDate = () => emit('resetActiveDate');
+
+const dateObject = new Date();
+const current = {
+  month: dateObject.getMonth() + 1,
+  year: dateObject.getFullYear(),
+  date: dateObject.getDate()
+}
+
+const resetDate = ref(JSON.stringify(props) !== JSON.stringify(current));
+
+watch(props, () => {
+  resetDate.value = JSON.stringify(props) !== JSON.stringify(current);
+});
 
 const nameOfMonth = ref(monthName(props.month)[0].toUpperCase() + monthName(props.month).slice(1));
 </script>

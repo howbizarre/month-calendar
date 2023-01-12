@@ -13,7 +13,7 @@
     </template>
 
     <template #footer>
-      <month-label :month="active.month" :year="active.year" :date="active.date" />
+      <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" />
     </template>
   </month-base>
 </template>
@@ -79,6 +79,13 @@ function resetMonth(): void {
   month.value = currentMonth;
 
   canBeReseted.value = false;
+}
+
+function resetActiveDate(): void {
+  console.log(active.month, currentMonth);
+  active.month = currentMonth;
+  active.year = currentYear;
+  active.date = currentDate;
 }
 </script>
 
