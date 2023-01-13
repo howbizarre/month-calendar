@@ -2,7 +2,7 @@
   <month-base>
     <template #header>
       <div class="grid grid-cols-5 p-3">
-        <month-info :month="month" :year="year" :class="`col-span-3`" />
+        <month-info :month="month" :year="year" @set-date="setDate" :class="`col-span-3`" />
         <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" :canBeReseted="canBeReseted" :class="`col-span-2`" />
       </div>
     </template>
@@ -57,12 +57,16 @@ const active = reactive({
 const canBeReseted = ref(false);
 const showSettings = ref(false);
 
+function setDate () {
+  showSettings.value = true;
+}
+
 function changeFirstDayOfTheWeek(firstDay: WeekFirstDay) {
   firstDayOfTheWeek.value = firstDay;
 }
 
 function showMonthSettings(): void {
-  showSettings.value = !showSettings.value;
+  showSettings.value = true;
 }
 
 function hideSettings(): void {
