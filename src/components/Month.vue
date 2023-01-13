@@ -13,7 +13,8 @@
     </template>
 
     <template #footer>
-      <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" />
+      <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" @show-month-settings="showMonthSettings" />
+      <month-settings :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change="changeFirstDayOfTheWeek" />
     </template>
   </month-base>
 </template>
@@ -33,6 +34,7 @@ import MonthWeek from "@/components/MonthWeek.vue";
 import MonthDays from "@/components/MonthDays.vue";
 import MonthLabel from "@/components/MonthLabel.vue";
 import MonthActions from "@/components/MonthActions.vue";
+import MonthSettings from "@/components/MonthSettings.vue";
 
 const firstDayOfTheWeek: Ref<WeekFirstDay> = ref("monday");
 
@@ -53,6 +55,19 @@ const active = reactive({
 
 /** Reset month to initial state */
 const canBeReseted = ref(false);
+const showSettings = ref(false);
+
+function changeFirstDayOfTheWeek(firstDay: WeekFirstDay) {
+  firstDayOfTheWeek.value = firstDay;
+}
+
+function showMonthSettings(): void {
+  showSettings.value = !showSettings.value;
+}
+
+function hideSettings(): void {
+  showSettings.value = false;
+}
 
 function activateDate(date: number, month: Month, year: number): void {
   const mnt = monthNumber(month);

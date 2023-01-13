@@ -34,7 +34,7 @@ const currentYear = dateObject.getFullYear();
 const currentDate = dateObject.getDate();
 
 const isWeedend = (day: string): string => {
-  return day === 'sat' || day === 'sun' ? 'weekend' : 'weekday';
+  return day === 'sat' || day === 'sun' ? 'weekend weekday' : 'weekday';
 }
 
 const isCurrent = (date: number, month: Month, year: number): string => {
@@ -85,11 +85,11 @@ watch(props, () => {
 }
 
 .calendar-day.weekend {
-    @apply bg-sky-500/5 hover:bg-cyan-500/25;
+    @apply bg-sky-500/5 text-teal-600 hover:bg-cyan-500/25;
 }
 
 .calendar-day.current {
-    @apply bg-teal-500/25;
+    @apply !bg-teal-500/25;
 }
 
 .calendar-day.active {

@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex items-center">
-      <button class="mr-2" @click="showModal = !showModal">
+      <button class="mr-2" @click="showMonthSettings">
         <svg width="20" height="20" viewBox="0 0 36 36">
           <path fill="currentColor" d="m32.57 15.72l-3.35-1a11.65 11.65 0 0 0-.95-2.33l1.64-3.07a.61.61 0 0 0-.11-.72l-2.39-2.4a.61.61 0 0 0-.72-.11l-3.05 1.63a11.62 11.62 0 0 0-2.36-1l-1-3.31a.61.61 0 0 0-.59-.41h-3.38a.61.61 0 0 0-.58.43l-1 3.3a11.63 11.63 0 0 0-2.38 1l-3-1.62a.61.61 0 0 0-.72.11L6.2 8.59a.61.61 0 0 0-.11.72l1.62 3a11.63 11.63 0 0 0-1 2.37l-3.31 1a.61.61 0 0 0-.43.58v3.38a.61.61 0 0 0 .43.58l3.33 1a11.62 11.62 0 0 0 1 2.33l-1.64 3.14a.61.61 0 0 0 .11.72l2.39 2.39a.61.61 0 0 0 .72.11l3.09-1.65a11.65 11.65 0 0 0 2.3.94l1 3.37a.61.61 0 0 0 .58.43h3.38a.61.61 0 0 0 .58-.43l1-3.38a11.63 11.63 0 0 0 2.28-.94l3.11 1.66a.61.61 0 0 0 .72-.11l2.39-2.39a.61.61 0 0 0 .11-.72l-1.66-3.1a11.63 11.63 0 0 0 .95-2.29l3.37-1a.61.61 0 0 0 .43-.58v-3.41a.61.61 0 0 0-.37-.59ZM18 23.5a5.5 5.5 0 1 1 5.5-5.5a5.5 5.5 0 0 1-5.5 5.5Z" class="clr-i-solid clr-i-solid-path-1" />
           <path fill="none" d="M0 0h36v36H0z" />
@@ -22,58 +22,11 @@
       </a>
     </div>
   </div>
-
-
-  <div v-if="showModal">
-    <div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-      <div class="relative w-auto my-6 mx-auto max-w-sm">
-        <!--content-->
-        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <!--header-->
-          <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-            <h3 class="text-3xl font-semibold">
-              Modal Title
-            </h3>
-            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" v-on:click="toggleModal()">
-              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                X
-              </span>
-            </button>
-          </div>
-          <!--body-->
-          <div class="relative p-6 flex-auto">
-            <p class="my-4 text-slate-500 text-lg leading-relaxed">
-              I always felt like I could do anything. That’s the main
-              thing people are controlled by! Thoughts- their perception
-              of themselves! They're slowed down by their perception of
-              themselves. If you're taught you can’t do anything, you
-              won’t do anything. I was taught I could do everything.
-            </p>
-          </div>
-          <!--footer-->
-          <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-            <button class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" v-on:click="toggleModal()">
-              Close
-            </button>
-            <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" v-on:click="toggleModal()">
-              Save Changes
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
-  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { monthName } from "typescript-calendar-date";
-
-const showModal = ref(false);
-const toggleModal = function(){
-  showModal.value = !showModal.value;
-    }
 
 const props = defineProps<{
   month: number;
@@ -81,9 +34,9 @@ const props = defineProps<{
   date: number;
 }>();
 
-const emit = defineEmits(['resetActiveDate']);
-
-const resetActiveDate = () => emit('resetActiveDate');
+const emit = defineEmits(['resetActiveDate', 'showMonthSettings']);
+const resetActiveDate = () =>  emit('resetActiveDate');
+const showMonthSettings = () => emit('showMonthSettings');
 
 const dateObject = new Date();
 const current = {
