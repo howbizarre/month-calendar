@@ -3,7 +3,7 @@
   <div class="info-bottom p-3">
     <div class="flex items-center">
       <strong>{{ date }} {{ nameOfMonth }} {{ year }}</strong>
-      <button @click="resetActiveDate" class="inline-block ml-2 px-2 py-[3px] bg-teal-600 text-white font-medium text-[10px] leading-relaxed uppercase rounded-full shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-teal-800 active:shadow-lg transition duration-150 ease-in-out" v-if="resetDate">
+      <button @click="resetActiveDate" class="inline-block ml-2 text-[10px] btn" v-if="resetDate">
         today
       </button>
     </div>

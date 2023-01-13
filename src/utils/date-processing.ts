@@ -14,6 +14,11 @@ type WeekFirstDay = "monday" | "sunday";
 
 const totalDaysInMonthGrid = 42;
 
+const monthsInYear = {
+    "short": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+    "long": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+};
+
 const weekDays = {
     "firstDay": {
         "0": "sunday",
@@ -100,4 +105,4 @@ const fillMonth = (month: number, year: number, firstDayOfTheWeek: WeekFirstDay)
     return fullFiledArray;
 };
 
-export { fillMonth, weekDays, type WeekFirstDay, type Month };
+export { fillMonth, weekDays, monthsInYear, type WeekFirstDay, type Month };

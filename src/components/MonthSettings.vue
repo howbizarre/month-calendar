@@ -1,12 +1,10 @@
 <template>
   <template v-if="showSettings.forWeekDay || showSettings.forDate">
-
     <div class="animate-[dim-show_0.25s_ease-in-out_1] overflow-x-hidden overflow-y-auto fixed inset-0 z-[99] justify-center items-center flex">
-      <div class="month-container w-[366px]">
-        <div class="p-3">
+      <div class="month-container w-[300px]">        
 
           <template v-if="showSettings.forWeekDay">
-            <h3 class="text-black dark:text-white">Set first day of the week to:</h3>
+            <h3 class="text-black dark:text-white">First day of the week is <strong class="text-teal-600 dark:text-teal-500">{{ firstWeekDay[0].toUpperCase() }}{{ firstWeekDay.slice(1) }}</strong></h3>
             <form class="flex flex-col">
               <label class="cursor-pointer text-black dark:text-white">
                 <input type="radio" id="monday" value="monday" v-model="firstWeekDay" @change="changeFirstWeekDay" /> Monday
@@ -17,10 +15,24 @@
             </form>
           </template>
 
-          <template v-if="showSettings.forDate">data</template>
+          <template v-if="showSettings.forDate">
+            
+              <div class="flex flex-row w-full rounded-full relative mb-5">
+                <button data-action="decrement" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l-full cursor-pointer outline-none">
+                  <span class="m-auto text-2xl font-thin flex justify-center items-center">-</span>
+                </button>
+                <input type="number" class="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700" name="custom-input-number" value="0" />
+                <button data-action="increment" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r-full cursor-pointer">
+                  <span class="m-auto text-2xl font-thin flex justify-center items-center">+</span>
+                </button>
+              </div>
+            
+            <div class="grid grid-cols-3 gap-3 text-black dark:text-white">
+              <button v-for="month in monthsInYear.short" class="btn text-[12px]">{{ month }}</button>
+            </div>
+          </template>
 
-          <button @click="hideSettings" class="float-right inline-block mt-2 px-2 py-[3px] bg-teal-600 text-white font-medium text-[10px] leading-relaxed uppercase rounded-full shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-teal-800 active:shadow-lg transition duration-150 ease-in-out">close</button>
-        </div>
+          <button @click="hideSettings" class="float-right mt-3 text-[10px] btn">close</button>        
       </div>
     </div>
     <div class="opacity-50 fixed inset-0 z-[98] bg-black"></div>
@@ -29,6 +41,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { monthsInYear } from "@/utils/date-processing";
 import type { WeekFirstDay } from "@/utils/date-processing";
 
 const props = defineProps<{

@@ -24,4 +24,8 @@
 .month-grid {
     @apply grid grid-cols-7 gap-y-2;
 }
+
+.btn {
+  @apply inline-block font-medium px-2 py-[3px] bg-teal-600 text-white leading-relaxed uppercase rounded-full shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-teal-800 active:shadow-lg transition duration-150 ease-in-out;
+}
 </style>
