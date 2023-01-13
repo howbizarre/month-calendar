@@ -55,10 +55,13 @@ const active = reactive({
 
 /** Reset month to initial state */
 const canBeReseted = ref(false);
-const showSettings = ref(false);
+const showSettings = reactive({
+  forWeekDay: false,
+  forDate: false
+});
 
 function setDate () {
-  showSettings.value = true;
+  showSettings.forDate = true;
 }
 
 function changeFirstDayOfTheWeek(firstDay: WeekFirstDay) {
@@ -66,11 +69,12 @@ function changeFirstDayOfTheWeek(firstDay: WeekFirstDay) {
 }
 
 function showMonthSettings(): void {
-  showSettings.value = true;
+  showSettings.forWeekDay = true;
 }
 
 function hideSettings(): void {
-  showSettings.value = false;
+  showSettings.forWeekDay = false;
+  showSettings.forDate = false;
 }
 
 function activateDate(date: number, month: Month, year: number): void {
