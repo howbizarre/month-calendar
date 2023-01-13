@@ -1,20 +1,26 @@
 <template>
     <div class="flex justify-between">
       <button @click="prevMonth">
-        <svg width="24" height="24" viewBox="0 0 256 256" class="action-icon">
-          <path fill="currentColor" d="m120 32l-96 96l96 96v-48h32V80h-32V32z" opacity=".2" />
-          <path fill="currentColor" d="M152 72h-24V32a8 8 0 0 0-4.9-7.4a8.4 8.4 0 0 0-8.8 1.7l-96 96a8.1 8.1 0 0 0 0 11.4l96 96a8.3 8.3 0 0 0 5.7 2.3a8.5 8.5 0 0 0 3.1-.6a8 8 0 0 0 4.9-7.4v-40h24a8 8 0 0 0 8-8V80a8 8 0 0 0-8-8Zm-8 96h-24a8 8 0 0 0-8 8v28.7L35.3 128L112 51.3V80a8 8 0 0 0 8 8h24Zm80-88v96a8 8 0 0 1-16 0V80a8 8 0 0 1 16 0Zm-32 0v96a8 8 0 0 1-16 0V80a8 8 0 0 1 16 0Z" />
+        <svg width="24" height="24" viewBox="0 0 24 24" class="action-icon">
+          <g id="evaArrowIosBackOutline0">
+            <g id="evaArrowIosBackOutline1">
+              <path id="evaArrowIosBackOutline2" fill="currentColor" d="M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64Z" />
+            </g>
+          </g>
         </svg>
       </button>
       <button @click="resetMonth" v-if="canBeReseted">
-        <svg width="24" height="24" viewBox="0 0 256 256" class="action-icon">
-          <path fill="currentColor" d="M195.9 195.9a96.1 96.1 0 0 1-135.8 0a8 8 0 0 1 0-11.3a7.9 7.9 0 0 1 11.3 0a80 80 0 1 0 0-113.2L51.1 91.7h28.7a8 8 0 0 1 0 16h-48a8 8 0 0 1-8-8v-48a8 8 0 1 1 16 0v28.7l20.3-20.3a96 96 0 0 1 135.8 135.8Z" />
+        <svg width="24" height="24" viewBox="0 0 24 24" class="action-icon">
+          <path fill="currentColor" d="M8.3 19.3q-.275-.275-.275-.7q0-.425.275-.7l1.1-1.1q-3.2-.425-5.3-1.75Q2 13.725 2 12q0-2.075 2.888-3.538Q7.775 7 12 7t7.113 1.462Q22 9.925 22 12q0 1.35-1.3 2.475t-3.475 1.8q-.5.15-.862-.125q-.363-.275-.363-.825q0-.3.212-.587q.213-.288.513-.388q1.575-.5 2.425-1.175Q20 12.5 20 12q0-.8-2.137-1.9Q15.725 9 12 9q-3.725 0-5.862 1.1Q4 11.2 4 12q0 .6 1.275 1.438Q6.55 14.275 8.9 14.7l-.6-.6q-.275-.275-.275-.7q0-.425.275-.7q.275-.275.7-.275q.425 0 .7.275l2.6 2.6q.15.15.213.325q.062.175.062.375t-.062.375q-.063.175-.213.325l-2.6 2.6q-.275.275-.7.275q-.425 0-.7-.275Z" />
         </svg>
       </button>
       <button @click="nextMonth">
-        <svg width="24" height="24" viewBox="0 0 256 256" class="action-icon">
-          <path fill="currentColor" d="m136 32l96 96l-96 96v-48h-32V80h32V32z" opacity=".2" />
-          <path fill="currentColor" d="m237.7 122.3l-96-96a8.4 8.4 0 0 0-8.8-1.7A8 8 0 0 0 128 32v40h-24a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h24v40a8 8 0 0 0 4.9 7.4a8.5 8.5 0 0 0 3.1.6a8.3 8.3 0 0 0 5.7-2.3l96-96a8.1 8.1 0 0 0 0-11.4ZM144 204.7V176a8 8 0 0 0-8-8h-24V88h24a8 8 0 0 0 8-8V51.3l76.7 76.7ZM48 80v96a8 8 0 0 1-16 0V80a8 8 0 0 1 16 0Zm32 0v96a8 8 0 0 1-16 0V80a8 8 0 0 1 16 0Z" />
+        <svg width="24" height="24" viewBox="0 0 24 24" class="action-icon">
+          <g id="evaArrowIosForwardOutline0">
+            <g id="evaArrowIosForwardOutline1">
+              <path id="evaArrowIosForwardOutline2" fill="currentColor" d="M10 19a1 1 0 0 1-.64-.23a1 1 0 0 1-.13-1.41L13.71 12L9.39 6.63a1 1 0 0 1 .15-1.41a1 1 0 0 1 1.46.15l4.83 6a1 1 0 0 1 0 1.27l-5 6A1 1 0 0 1 10 19Z" />
+            </g>
+          </g>
         </svg>
       </button>
     </div>
