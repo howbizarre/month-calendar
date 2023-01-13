@@ -34,9 +34,9 @@ const props = defineProps<{
   date: number;
 }>();
 
-const emit = defineEmits(['resetActiveDate', 'showMonthSettings']);
-const resetActiveDate = () =>  emit('resetActiveDate');
-const showMonthSettings = () => emit('showMonthSettings');
+const emit = defineEmits(["resetActiveDate", "showMonthSettings"]);
+const resetActiveDate = () =>  emit("resetActiveDate");
+const showMonthSettings = () => emit("showMonthSettings");
 
 const dateObject = new Date();
 const current = {

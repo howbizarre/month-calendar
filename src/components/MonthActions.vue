@@ -25,11 +25,11 @@ const props = defineProps<{
   canBeReseted: boolean;
 }>();
 
-const emit = defineEmits(['prevMonth', 'resetMonth', 'nextMonth']);
+const emit = defineEmits(["prevMonth", "resetMonth", "nextMonth"]);
 
-const prevMonth = () => emit('prevMonth');
-const resetMonth = () => emit('resetMonth');
-const nextMonth = () => emit('nextMonth');
+const prevMonth = () => emit("prevMonth");
+const resetMonth = () => emit("resetMonth");
+const nextMonth = () => emit("nextMonth");
 </script>
 
 <style>

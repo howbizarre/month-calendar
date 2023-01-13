@@ -34,21 +34,21 @@ const currentYear = dateObject.getFullYear();
 const currentDate = dateObject.getDate();
 
 const isWeedend = (day: string): string => {
-  return day === 'sat' || day === 'sun' ? 'weekend weekday' : 'weekday';
+  return day === "sat" || day === "sun" ? "weekend weekday" : "weekday";
 }
 
 const isCurrent = (date: number, month: Month, year: number): string => {
   const mnt = monthNumber(month);
 
   if (year !== currentYear) {
-    return '';
+    return "";
   }
 
   if (mnt !== currentMonth) {
-    return '';
+    return "";
   }
 
-  return `${date}${mnt}${year}` === `${currentDate}${currentMonth}${currentYear}` ? 'current' : '';
+  return `${date}${mnt}${year}` === `${currentDate}${currentMonth}${currentYear}` ? "current" : "";
 }
 
 const isActive = (date: number, month: Month, year: number): string => {
@@ -59,14 +59,14 @@ const isActive = (date: number, month: Month, year: number): string => {
   const m = mnt && monthName(mnt);
 
   if (!yr || year !== yr) {
-    return '';
+    return "";
   }
 
   if (!mnt || m !== month) {
-    return '';
+    return "";
   }
 
-  return `${date}${month}${year}` === `${dt}${m}${yr}` ? 'active' : '';
+  return `${date}${month}${year}` === `${dt}${m}${yr}` ? "active" : "";
 };
 
 const allDaysInMonth = ref(fillMonth(props.month, props.year, props.startDay));
