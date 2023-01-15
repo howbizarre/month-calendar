@@ -14,7 +14,7 @@
 
     <template #footer>
       <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" @show-month-settings="showMonthSettings" />
-      <month-settings :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
+      <month-settings @decrement-year="decrementYear" @increment-year="incrementYear" :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
     </template>
   </month-base>
 </template>
@@ -59,6 +59,16 @@ const showSettings = reactive({
   forWeekDay: false,
   forDate: false
 });
+
+function decrementYear(decYear: number): void {
+  year.value = decYear;
+  canBeReseted.value = year.value === currentYear && month.value === currentMonth ? false : true;
+}
+
+function incrementYear(incYear: number): void {
+  year.value = incYear;
+  canBeReseted.value = year.value === currentYear && month.value === currentMonth ? false : true;
+}
 
 function setDate () {
   showSettings.forDate = true;

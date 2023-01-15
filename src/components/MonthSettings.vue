@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, onUpdated } from "vue";
 import { monthsInYear } from "@/utils/date-processing";
 import type { WeekFirstDay } from "@/utils/date-processing";
 
@@ -65,6 +65,10 @@ const props = defineProps<{
 
 const firstWeekDay = ref(props.startDay);
 const thisYear = ref(props.year);
+
+onUpdated(() => {
+  thisYear.value = props.year;
+});
 
 const emit = defineEmits(["hideSettings", "changeFirstWeekDay", "decrementYear", "incrementYear"]);
 const hideSettings = () => emit("hideSettings");
