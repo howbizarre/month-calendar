@@ -14,7 +14,7 @@
 
     <template #footer>
       <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" @show-month-settings="showMonthSettings" />
-      <month-settings :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
+      <month-settings :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
     </template>
   </month-base>
 </template>
