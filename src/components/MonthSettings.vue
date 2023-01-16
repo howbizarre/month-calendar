@@ -1,6 +1,6 @@
 <template>
   <template v-if="showSettings.forWeekDay || showSettings.forDate">
-    <div class="animate-[dim-show_0.25s_ease-in-out_1] overflow-x-hidden overflow-y-auto fixed inset-0 z-[99] justify-center items-center flex">
+    <div @click.self="hideSettings" class="animate-[dim-show_0.25s_ease-in-out_1] overflow-x-hidden overflow-y-auto fixed inset-0 z-[99] justify-center items-center flex">
       <div class="month-container w-[300px]">
 
         <template v-if="showSettings.forWeekDay">
@@ -25,7 +25,7 @@
               </span>              
             </button>
 
-            <input type="number" v-model.number="thisYear" class="outline-none text-center w-full font-semibold text-md flex items-center bg-teal-600 text-white focus:bg-teal-700" />
+            <input @keyup="changeYear(thisYear)" type="number" v-model.number="thisYear" class="outline-none text-center w-full font-semibold text-md flex items-center bg-teal-600 text-white focus:bg-teal-700" />
             
             <button @click="incrementYear" class="bg-teal-600 text-white hover:bg-teal-700 w-20 rounded-r-full cursor-pointer">
               <span class="flex justify-center">
@@ -37,7 +37,7 @@
           </div>
 
           <div class="grid grid-cols-3 gap-3 text-black dark:text-white">
-            <button v-for="month in monthsInYear.short" class="btn text-[12px]">{{ month }}</button>
+            <button @click="changeMonth(month)" v-for="month in monthsInYear.short" class="btn text-[12px]" :class="{active: checkMonth(month)}">{{ month }}</button>
           </div>
         </template>
 
@@ -49,8 +49,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onUpdated } from "vue";
+import { ref, watch } from "vue";
 import { monthsInYear } from "@/utils/date-processing";
+import { monthName } from "typescript-calendar-date";
 import type { WeekFirstDay } from "@/utils/date-processing";
 
 const props = defineProps<{
@@ -65,24 +66,38 @@ const props = defineProps<{
 
 const firstWeekDay = ref(props.startDay);
 const thisYear = ref(props.year);
+const thisMonth = ref(props.month);
 
-onUpdated(() => {
+watch(props, () => {
   thisYear.value = props.year;
+  thisMonth.value = props.month;
 });
 
-const emit = defineEmits(["hideSettings", "changeFirstWeekDay", "decrementYear", "incrementYear"]);
+const emit = defineEmits(["hideSettings", "changeFirstWeekDay", "decrementYear", "incrementYear", "changeYear", "changeMonth"]);
 const hideSettings = () => emit("hideSettings");
 
-function changeFirstWeekDay() {
+function checkMonth(mnt: string): boolean {
+  return mnt === monthName(thisMonth.value);
+}
+
+function changeMonth(monthValue: string): void {
+  emit("changeMonth", monthValue);
+}
+
+function changeYear(yearValue: number): void {
+  emit("changeYear", yearValue);
+}
+
+function changeFirstWeekDay(): void {
   emit("changeFirstWeekDay", firstWeekDay.value);
 }
 
-function decrementYear() {
+function decrementYear(): void {
   thisYear.value -= 1;
   emit("decrementYear", thisYear.value);
 }
 
-function incrementYear() {
+function incrementYear(): void {
   thisYear.value += 1;
   emit("incrementYear", thisYear.value);
 }
@@ -93,4 +108,6 @@ function incrementYear() {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+.active { @apply bg-blue-700; }
 </style>

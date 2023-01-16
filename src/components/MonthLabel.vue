@@ -46,12 +46,12 @@ const current = {
 }
 
 const resetDate = ref(JSON.stringify(props) !== JSON.stringify(current));
+const nameOfMonth = ref(monthName(props.month)[0].toUpperCase() + monthName(props.month).slice(1));
 
 watch(props, () => {
   resetDate.value = JSON.stringify(props) !== JSON.stringify(current);
+  nameOfMonth.value = monthName(props.month)[0].toUpperCase() + monthName(props.month).slice(1);
 });
-
-const nameOfMonth = ref(monthName(props.month)[0].toUpperCase() + monthName(props.month).slice(1));
 </script>
 
 <style>

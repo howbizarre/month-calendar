@@ -14,7 +14,7 @@
 
     <template #footer>
       <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" @show-month-settings="showMonthSettings" />
-      <month-settings @decrement-year="decrementYear" @increment-year="incrementYear" :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
+      <month-settings @change-month="changeMonth" @change-year="changeYear" @decrement-year="decrementYear" @increment-year="incrementYear" :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
     </template>
   </month-base>
 </template>
@@ -48,9 +48,9 @@ const year = ref(currentYear);
 
 /** The selected active date. If none is selected - the current date is selected. */
 const active = reactive({
-  month: ref(currentMonth),
-  year: ref(currentYear),
-  date: ref(currentDate)
+  month: currentMonth,
+  year: currentYear,
+  date: currentDate
 });
 
 /** Reset month to initial state */
@@ -60,14 +60,28 @@ const showSettings = reactive({
   forDate: false
 });
 
+function changeMonth(monthValue: Month): void {
+  month.value = monthNumber(monthValue);
+  canBeReseted.value = checkReset(year.value, month.value);
+}
+
+function changeYear(yearValue: number): void {
+  year.value = yearValue;
+  canBeReseted.value = checkReset(year.value, month.value);
+}
+
 function decrementYear(decYear: number): void {
   year.value = decYear;
-  canBeReseted.value = year.value === currentYear && month.value === currentMonth ? false : true;
+  canBeReseted.value = checkReset(year.value, month.value);
 }
 
 function incrementYear(incYear: number): void {
   year.value = incYear;
-  canBeReseted.value = year.value === currentYear && month.value === currentMonth ? false : true;
+  canBeReseted.value = checkReset(year.value, month.value);
+}
+
+function checkReset(year: number, month: number): boolean {
+  return year === currentYear && month === currentMonth ? false : true;
 }
 
 function setDate () {
@@ -98,21 +112,18 @@ function activateDate(date: number, month: Month, year: number): void {
 function nextMonth(): void {
   year.value = month.value === 12 ? year.value + 1 : year.value;
   month.value = month.value === 12 ? 1 : month.value + 1;
-
-  canBeReseted.value = year.value === currentYear && month.value === currentMonth ? false : true;
+  canBeReseted.value = checkReset(year.value, month.value);
 }
 
 function prevMonth(): void {
   year.value = month.value === 1 ? year.value - 1 : year.value;
   month.value = month.value === 1 ? 12 : month.value - 1;
-
-  canBeReseted.value = year.value === currentYear && month.value === currentMonth ? false : true;
+  canBeReseted.value = checkReset(year.value, month.value);
 }
 
 function resetMonth(): void {
   year.value = currentYear;
   month.value = currentMonth;
-
   canBeReseted.value = false;
 }
 
