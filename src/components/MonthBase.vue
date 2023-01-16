@@ -26,6 +26,11 @@
 }
 
 .btn {
-  @apply inline-block font-medium px-2 py-[3px] bg-teal-600 text-white leading-relaxed uppercase rounded-full shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-teal-800 active:shadow-lg transition duration-150 ease-in-out;
+  @apply
+    inline-block font-medium px-2 py-[3px]
+    bg-teal-600 text-white hover:bg-teal-700 focus:bg-teal-700 active:bg-teal-800
+    leading-relaxed uppercase rounded-full
+    shadow-md active:shadow-lg hover:shadow-lg focus:shadow-lg
+    focus:outline-none focus:ring-0 transition duration-150 ease-in-out;
 }
 </style>

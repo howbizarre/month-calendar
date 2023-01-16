@@ -2,19 +2,19 @@
   <month-base>
     <template #header>
       <div class="grid grid-cols-5 p-3">
-        <month-info :month="month" :year="year" @set-date="setDate" :class="`col-span-3`" />
-        <month-actions @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" :canBeReseted="canBeReseted" :class="`col-span-2`" />
+        <month-info :month="month" :year="year" @set-date="setDate" class="col-span-3" />
+        <month-actions :canBeReseted="canBeReseted" @prev-month="prevMonth" @next-month="nextMonth" @reset-month="resetMonth" class="col-span-2" />
       </div>
     </template>
 
     <template #default>
       <month-week :startDay="firstDayOfTheWeek" />
-      <month-days :startDay="firstDayOfTheWeek" :month="month" :year="year" @activate-date="activateDate" :activeDay="active" />
+      <month-days :month="month" :year="year" :startDay="firstDayOfTheWeek" :activeDay="active" @activate-date="activateDate" />
     </template>
 
     <template #footer>
       <month-label :month="active.month" :year="active.year" :date="active.date" @reset-active-date="resetActiveDate" @show-month-settings="showMonthSettings" />
-      <month-settings @change-month="changeMonth" @change-year="changeYear" @decrement-year="decrementYear" @increment-year="incrementYear" :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
+      <month-settings :month="month" :year="year" :startDay="firstDayOfTheWeek" :showSettings="showSettings" @change-month="changeMonth" @change-year="changeYear" @decrement-year="decrementYear" @increment-year="incrementYear" @hide-settings="hideSettings" @change-first-week-day="changeFirstDayOfTheWeek" />
     </template>
   </month-base>
 </template>

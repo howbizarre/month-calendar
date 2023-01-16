@@ -110,4 +110,18 @@ function incrementYear(): void {
 }
 
 .active { @apply bg-blue-700; }
+
+/* Remove default arrows in input type number fields */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 </style>
