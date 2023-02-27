@@ -6,6 +6,10 @@ You can revert the month till the end of time in any direction and return back t
 
 ## Dependency
 
+- [@howbizarre/vue-month-calendar](https://www.npmjs.com/package/@howbizarre/vue-month-calendar)
+
+## Frameworks
+
 - [Typescript calendar](https://github.com/tskj/typescript-calendar-date)
 - [Vue 3](https://github.com/vuejs/core)
 - [Tailwindcss](https://github.com/tailwindlabs/tailwindcss)
