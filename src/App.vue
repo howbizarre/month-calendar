@@ -6,6 +6,9 @@
 import { VueMonthCalendar } from "@howbizarre/vue-month-calendar";
 import "@howbizarre/vue-month-calendar/dist/style.css";
 
+import LogRocket from 'logrocket';
+LogRocket.init(`${import.meta.env.VITE_LOGROCKET_ID}`);
+
 const date = new Date();
 const currentMonth = date.getMonth();
 const currentYear = date.getFullYear();
