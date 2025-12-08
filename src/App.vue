@@ -28,7 +28,7 @@ function getDate(activeDate: { month: number, year: number, date: number }) {
   console.group("The returned data is:");
   console.log("Day: ", activeDate.date);
   console.log("Month: ", activeDate.month);
-  console.log("Yeaar: ", activeDate.year);
+  console.log("Year: ", activeDate.year);
   console.groupEnd();
 }
 
