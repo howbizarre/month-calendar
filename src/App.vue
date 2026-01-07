@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VueMonthCalendar } from "@howbizarre/vue-month-calendar";
-import "@howbizarre/vue-month-calendar/dist/style.css";
+import "@howbizarre/vue-month-calendar/dist/vue-month-calendar.css";
 
 const date = new Date();
 const currentMonth = date.getMonth();
